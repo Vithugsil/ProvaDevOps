@@ -1,0 +1,38 @@
+services:
+  products:
+    build:
+      context: ./api-produtos
+    container_name: products
+    ports:
+      - "3001:3001"
+
+  orders:
+    build:
+      context: ./api-pedidos
+    container_name: orders
+    ports:
+      - "3002:3002"
+    
+
+  payment:
+    build:
+      context: ./api-pagamento
+    container_name: payment
+    ports:
+      - "3003:3003"
+    
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  db:
+    image: mysql:8
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: ecommerce
+    ports:
+      - "3307:3307"
